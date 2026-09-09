@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ve a verlo</title>
+    <style>
+      :root {
+        --bg1: #fff7d6;
+        --bg2: #ffe4b3;
+        --card: rgba(255, 255, 255, 0.7);
+        --gold: #f6b93b;
+        --rose: #ec6d8d;
+        --red: #d93d4c;
+        --ink: #4c1e1b;
+        --shadow: rgba(82, 37, 30, 0.25);
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        font-family: Arial, Helvetica, sans-serif;
+        background: linear-gradient(135deg, var(--bg1), var(--bg2));
+        color: var(--ink);
+      }
+
+      .page {
+        width: min(92vw, 980px);
+        text-align: center;
+        position: relative;
+        padding: 36px 20px 24px;
+      }
+
+      .flag-row {
+        position: absolute;
+        inset: 0 0 auto 0;
+        display: flex;
+        justify-content: space-between;
+        pointer-events: none;
+      }
+
+      .flag {
+        width: 80px;
+        height: 70px;
+        position: relative;
+        animation: bob 1.8s ease-in-out infinite alternate;
+      }
+
+      .flag::before {
+        content: "";
+        position: absolute;
+        inset: 0 0 0 0;
+        background: linear-gradient(135deg, #ffcc4d, #ff7b54, #ef476f);
+        clip-path: polygon(0 0, 100% 50%, 0 100%, 18% 50%);
+        border-radius: 10px 10px 0 0;
+        transform: rotate(10deg);
+      }
+
+      .flag::after {
+        content: "";
+        position: absolute;
+        left: 28px;
+        top: 42px;
+        width: 3px;
+        height: 42px;
+        background: #7a4d2e;
+        border-radius: 10px;
+      }
+
+      .flag.right {
+        transform: scaleX(-1);
+      }
+
+      h1 {
+        margin: 0 0 16px;
+        font-size: clamp(2rem, 5vw, 4rem);
+        line-height: 1.1;
+        color: var(--red);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        text-shadow: 3px 3px 0 rgba(255,255,255,0.7);
+      }
+
+      .video-shell {
+        position: relative;
+        max-width: 820px;
+        margin: 0 auto;
+        padding: 18px;
+        border-radius: 28px;
+        background: rgba(255,255,255,0.55);
+        border: 5px solid rgba(255, 177, 76, 0.7);
+        box-shadow: 0 18px 32px var(--shadow);
+      }
+
+      .video-shell::before,
+      .video-shell::after {
+        content: "";
+        position: absolute;
+        width: 62px;
+        height: 62px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(255, 213, 107, 0.8), rgba(255, 213, 107, 0.2));
+        top: -22px;
+      }
+
+      .video-shell::before { left: 18px; }
+      .video-shell::after { right: 18px; }
+
+      video {
+        display: block;
+        width: 100%;
+        height: auto;
+        max-height: 70vh;
+        border-radius: 20px;
+        background: #000;
+      }
+
+      .cta {
+        margin-top: 22px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+
+      .arrow {
+        font-size: clamp(2rem, 4vw, 3rem);
+        color: var(--rose);
+        animation: pulse 1s ease-in-out infinite alternate;
+      }
+
+      .arrow.left { transform: rotate(180deg); }
+
+      .cta a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 16px 28px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, var(--gold), #fca311);
+        color: #fff;
+        text-decoration: none;
+        font-size: clamp(1.15rem, 2vw, 1.7rem);
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        box-shadow: 0 10px 18px rgba(246, 185, 59, 0.45);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .cta a:hover {
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 14px 20px rgba(246, 185, 59, 0.5);
+      }
+
+      .hint {
+        margin-top: 10px;
+        font-weight: 700;
+        color: var(--ink);
+        letter-spacing: 0.8px;
+      }
+
+      @keyframes bob {
+        0% { transform: translateY(0) rotate(-4deg); }
+        100% { transform: translateY(10px) rotate(4deg); }
+      }
+
+      @keyframes pulse {
+        0% { transform: translateX(0) scale(1); opacity: 0.6; }
+        100% { transform: translateX(6px) scale(1.08); opacity: 1; }
+      }
+
+      @media (max-width: 600px) {
+        .page {
+          padding-top: 24px;
+        }
+
+        .flag {
+          width: 52px;
+          height: 52px;
+        }
+
+        .cta {
+          gap: 8px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <div class="flag-row" aria-hidden="true">
+        <div class="flag"></div>
+        <div class="flag right"></div>
+      </div>
+
+      <h1>Ve a verlo</h1>
+
+      <div class="video-shell">
+        <video src="Pacto.mp4" controls playsinline preload="metadata"></video>
+      </div>
+
+      <div class="cta" aria-label="Enlace a YouTube">
+        <span class="arrow left">➜</span>
+        <a href="https://youtu.be/DzyJJ5tgZjs?si=_a6APCltOzAKY2Lo" target="_blank" rel="noopener noreferrer">
+          Ver en YouTube
+        </a>
+        <span class="arrow">➜</span>
+      </div>
+
+      <div class="hint">Mira este video y comparte la emoción</div>
+    </main>
+  </body>
+</html>
